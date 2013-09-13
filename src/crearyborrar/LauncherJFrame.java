@@ -41,6 +41,7 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("CrearYBorrar");
 
         jButton1.setText("Play");
         jButton1.addActionListener(this);

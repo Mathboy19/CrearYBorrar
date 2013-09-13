@@ -58,7 +58,7 @@ public class CrearYBorrar extends JFrame implements Runnable {
     
     public CrearYBorrar() {
         setSize(400,400);
-        setTitle("CrearYBorrar");
+        setTitle("CrearYBorrarClassic");
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -37,7 +37,8 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
     public void run() {
         try {
             while (mousePressed == false) {
-                //System.out.println("MousePressed = False!");
+                //System.out.println("MousePressed=False");
+                Thread.sleep(20);
             }
             start = System.nanoTime();
             end = System.nanoTime();
@@ -64,7 +65,7 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
 
     public CrearYBorrarNormal() {
         setSize(400, 400);
-        setTitle("CrearYBorrar");
+        setTitle("CrearYBorrarNormal");
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -73,6 +74,10 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
     }
 
     public void move() {
+        
+        if (mouseDragged == false) {
+            collision = true;
+        }
         //mouse
         x1 = mx;
         y1 = my;
@@ -256,26 +261,33 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
     public class MouseListener2 implements MouseListener {
         @Override
         public void mousePressed(MouseEvent e) {
-            mousePressed = true;
+            if(e.getX() > 200 && e.getX() < 250 && e.getY() > 200 && 
+            e.getY() < 250) {
+                mousePressed = true;
+            }
+            e.consume();
+            
+            
         }
         @Override
         public void mouseReleased(MouseEvent e) {
             mouseReleased = false;
+            e.consume();
         }
 
         @Override
-        public void mouseClicked(MouseEvent me) {
-            
+        public void mouseClicked(MouseEvent e) {
+            e.consume();
         }
 
         @Override
-        public void mouseEntered(MouseEvent me) {
-            
+        public void mouseEntered(MouseEvent e) {
+            e.consume();
         }
 
         @Override
-        public void mouseExited(MouseEvent me) {
-            
+        public void mouseExited(MouseEvent e) {
+            e.consume();
         }
     }
 
