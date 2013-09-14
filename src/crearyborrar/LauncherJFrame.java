@@ -4,6 +4,7 @@
  */
 package crearyborrar;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -42,6 +43,7 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CrearYBorrar");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("./CrearYBorrar.gif")));
 
         jButton1.setText("Play");
         jButton1.addActionListener(this);
@@ -164,6 +166,7 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
+        setDefaultLookAndFeelDecorated(true);
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 

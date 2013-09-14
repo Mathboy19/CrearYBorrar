@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import javax.swing.JFrame;
@@ -59,6 +60,8 @@ public class CrearYBorrar extends JFrame implements Runnable {
     public CrearYBorrar() {
         setSize(400,400);
         setTitle("CrearYBorrarClassic");
+        //setIconImage(Toolkit.getDefaultToolkit().
+        //             getImage(getClass().getResource("./CrearYBorrar.gif")));
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

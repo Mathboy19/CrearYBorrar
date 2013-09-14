@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -19,10 +20,10 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
     int my = 200;
     int x1 = 225;
     int y1 = 225;
-    Enemy enemy1 = new Enemy(50, 50, 5);
-    Enemy enemy2 = new Enemy(350, 50, 7);
-    Enemy enemy3 = new Enemy(350, 350, 9);
-    Enemy enemy4 = new Enemy(50, 350, 3);
+    Enemy enemy1 = new Enemy(20, 20, 5);
+    Enemy enemy2 = new Enemy(300, 40, 7);
+    Enemy enemy3 = new Enemy(340, 300, 9);
+    Enemy enemy4 = new Enemy(20, 330, 3);
     double start;
     double end;
     double quarter = 0.25;
@@ -66,6 +67,8 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
     public CrearYBorrarNormal() {
         setSize(400, 400);
         setTitle("CrearYBorrarNormal");
+        setIconImage(Toolkit.getDefaultToolkit().
+        getImage(getClass().getResource("./CrearYBorrar.gif")));
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -74,8 +77,7 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
     }
 
     public void move() {
-        
-        if (mouseDragged == false) {
+        if (mouseReleased == true) {
             collision = true;
         }
         //mouse
@@ -271,7 +273,7 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
         }
         @Override
         public void mouseReleased(MouseEvent e) {
-            mouseReleased = false;
+            mouseReleased = true;
             e.consume();
         }
 
