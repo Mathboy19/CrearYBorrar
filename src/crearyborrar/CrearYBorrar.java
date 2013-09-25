@@ -60,8 +60,6 @@ public class CrearYBorrar extends JFrame implements Runnable {
     public CrearYBorrar() {
         setSize(400,400);
         setTitle("CrearYBorrarClassic");
-        //setIconImage(Toolkit.getDefaultToolkit().
-        //             getImage(getClass().getResource("./CrearYBorrar.gif")));
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

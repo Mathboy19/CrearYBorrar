@@ -67,8 +67,6 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
     public CrearYBorrarNormal() {
         setSize(400, 400);
         setTitle("CrearYBorrarNormal");
-        setIconImage(Toolkit.getDefaultToolkit().
-        getImage(getClass().getResource("./CrearYBorrar.gif")));
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -79,6 +77,9 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
     public void move() {
         if (mouseReleased == true) {
             collision = true;
+            JOptionPane.showMessageDialog(null, 
+                    "You Unclicked! You have to hold down the mouse to play!", 
+                    "Mouse Error!", JOptionPane.ERROR_MESSAGE);
         }
         //mouse
         x1 = mx;

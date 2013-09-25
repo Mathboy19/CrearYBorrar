@@ -6,6 +6,7 @@ package crearyborrar;
 
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
@@ -13,12 +14,12 @@ import javax.swing.JOptionPane;
  *
  * @author mathboy19
  */
-public class LauncherJFrame extends javax.swing.JFrame implements ActionListener {
+public class LauncherJFrame extends javax.swing.JFrame implements ActionListener, ItemListener {
 
     /**
      * Creates new form LauncherJFrame
      */
-    int choice = 1;
+    int choice;
 
     public LauncherJFrame() {
         initComponents();
@@ -43,15 +44,15 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CrearYBorrar");
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("./CrearYBorrar.gif")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("resources/CrearYBorrar.gif")));
 
         jButton1.setText("Play");
         jButton1.addActionListener(this);
 
         jLabel1.setText("Gamemode:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Classic", "Normal", "Large", "Gigantic" }));
-        jComboBox1.addActionListener(this);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pick One!", "Classic", "Normal", "Large", "Gigantic" }));
+        jComboBox1.addItemListener(this);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -65,6 +66,7 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
         );
 
         jButton2.setText("Help");
+        jButton2.addActionListener(this);
 
         jButton3.setText("Exit");
         jButton3.setToolTipText("Closes the game.");
@@ -85,7 +87,7 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -114,11 +116,17 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
         if (evt.getSource() == jButton1) {
             LauncherJFrame.this.jButton1ActionPerformed(evt);
         }
-        else if (evt.getSource() == jComboBox1) {
-            LauncherJFrame.this.jComboBox1ActionPerformed(evt);
-        }
         else if (evt.getSource() == jButton3) {
             LauncherJFrame.this.jButton3ActionPerformed(evt);
+        }
+        else if (evt.getSource() == jButton2) {
+            LauncherJFrame.this.jButton2ActionPerformed(evt);
+        }
+    }
+
+    public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        if (evt.getSource() == jComboBox1) {
+            LauncherJFrame.this.jComboBox1ItemStateChanged(evt);
         }
     }// </editor-fold>//GEN-END:initComponents
 
@@ -133,33 +141,45 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
             //Threads
             Thread t2 = new Thread(c2);
             t2.start();
-        } else if (choice == 3) {
-            JOptionPane.showMessageDialog(this, "Gamemode Not Supported!");
-        } else if (choice == 4) {
-            JOptionPane.showMessageDialog(this, "Gamemode Not Supported!");
+        } else if (choice == 0) {
+            JOptionPane.showMessageDialog(null, 
+                    "Gamemode Not Supported!", 
+                    "Gamemode Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        JComboBox cb = (JComboBox) evt.getSource();
-        String selection = (String) cb.getSelectedItem();
-        if (selection == "Classic") {
-            choice = 1;
-        } else if (selection == "Normal") {
-            choice = 2;
-        } else if (selection == "Big") {
-            choice = 3;
-        } else if (selection == "Gigantic") {
-            choice = 4;
-        }
-
-
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         super.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        JComboBox cb = (JComboBox) evt.getSource();
+        String selection = (String) cb.getSelectedItem();
+        if (selection == "Pick One!") {
+            choice = 0;
+        } if (selection == "Classic") {
+            choice = 1;
+        } if (selection == "Normal") {
+            choice = 2;
+        } if (selection == "Large") {
+            choice = 0;
+        } if (selection == "Gigantic") {
+            choice = 0;
+        }
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //System.out.println("Choice =" + choice);
+        JOptionPane.showMessageDialog(null, 
+                    "Info:"
+                    + "\nCreater: Mathboy19"
+                    + "\nVersion: 1.2"
+                    + "\nFor more information, visit:"
+                    + "\nwww.github.com/Mathboy19/CrearYBorrar",
+                    "CrearYBorrar Info", JOptionPane.ERROR_MESSAGE);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
