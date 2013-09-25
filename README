@@ -1,5 +1,9 @@
-CrearYBorrar README
+#CrearYBorrar README
+~~~~~~~
+This game was based of the game from http://www.deseoaprender.com/CrearYBorrar.htm, but was coded from scratch.
+~~~~~~~
 
-~~~~~~~
-This game was based of the game from http://www.deseoaprender.com/CrearYBorrar.htm,but was coded from scratch.
-~~~~~~~
+#Changelog(v1.2)
+-Added help button
+-Fixed glitch with selector
+-Added warning for unclicking on normal mode.
