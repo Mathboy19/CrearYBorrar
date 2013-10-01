@@ -7,6 +7,7 @@ package crearyborrar;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseListener;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
@@ -20,10 +21,16 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
      * Creates new form LauncherJFrame
      */
     int choice;
+    String description = "This is not a gamemode!";
 
     public LauncherJFrame() {
         initComponents();
 
+    }
+    
+    public void updateFrame() {
+        jTextArea1.setText(description);
+        
     }
 
     /**
@@ -35,12 +42,30 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(jTextPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CrearYBorrar");
@@ -72,6 +97,12 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
         jButton3.setToolTipText("Closes the game.");
         jButton3.addActionListener(this);
 
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(10);
+        jTextArea1.setRows(5);
+        jTextArea1.setText(description);
+        jScrollPane2.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,10 +115,13 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -98,9 +132,11 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -116,11 +152,11 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
         if (evt.getSource() == jButton1) {
             LauncherJFrame.this.jButton1ActionPerformed(evt);
         }
-        else if (evt.getSource() == jButton3) {
-            LauncherJFrame.this.jButton3ActionPerformed(evt);
-        }
         else if (evt.getSource() == jButton2) {
             LauncherJFrame.this.jButton2ActionPerformed(evt);
+        }
+        else if (evt.getSource() == jButton3) {
+            LauncherJFrame.this.jButton3ActionPerformed(evt);
         }
     }
 
@@ -141,6 +177,11 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
             //Threads
             Thread t2 = new Thread(c2);
             t2.start();
+        } else if (choice == 3) {
+            CrearYBorrarLarge c3 = new CrearYBorrarLarge();
+            //Threads
+            Thread t3 = new Thread(c3);
+            t3.start();
         } else if (choice == 0) {
             JOptionPane.showMessageDialog(null, 
                     "Gamemode Not Supported!", 
@@ -158,23 +199,38 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
         String selection = (String) cb.getSelectedItem();
         if (selection == "Pick One!") {
             choice = 0;
+            description = "This is not a gamemode!";
+            updateFrame();
         } if (selection == "Classic") {
             choice = 1;
+            description = "Classic Mode:"
+                    + "\nThe first mode that was"
+                    + "\ncoded, it contains some "
+                    + "\nglitches."
+                    + "\n\n**NOTE: This was the"
+                    + "\nOriginal CrearYBorrar** ";
+            updateFrame();
         } if (selection == "Normal") {
             choice = 2;
+            description = "Normal Mode:"
+                    + "\nThe non-glitchy Classic"
+                    + "\nmode. Also contains some"
+                    + "\nnew features.";
+            updateFrame();
         } if (selection == "Large") {
-            choice = 0;
+            choice = 3;
         } if (selection == "Gigantic") {
             choice = 0;
         }
+        
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        //System.out.println("Choice =" + choice);
+        System.out.println("String =" + description);
         JOptionPane.showMessageDialog(null, 
                     "Info:"
                     + "\nCreater: Mathboy19"
-                    + "\nVersion: 1.2"
+                    + "\nVersion: 1.3"
                     + "\nFor more information, visit:"
                     + "\nwww.github.com/Mathboy19/CrearYBorrar",
                     "CrearYBorrar Info", JOptionPane.ERROR_MESSAGE);
@@ -223,5 +279,10 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }

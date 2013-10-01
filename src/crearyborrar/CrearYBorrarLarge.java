@@ -1,5 +1,6 @@
 package crearyborrar;
 
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -12,18 +13,18 @@ import javax.swing.JFrame;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
-public class CrearYBorrarNormal extends JFrame implements Runnable {
+public class CrearYBorrarLarge extends JFrame implements Runnable {
 
     private Image dbImage;
     private Graphics dbg;
-    int mx = 200;
-    int my = 200;
+    int mx = 300;
+    int my = 300;
     int x1 = 225;
     int y1 = 225;
-    Enemy enemy1 = new Enemy(20, 20, 5);
-    Enemy enemy2 = new Enemy(300, 40, 7);
-    Enemy enemy3 = new Enemy(340, 300, 9);
-    Enemy enemy4 = new Enemy(20, 330, 3);
+    CrearYBorrarLarge.Enemy enemy1 = new CrearYBorrarLarge.Enemy(20, 20, 5);
+    CrearYBorrarLarge.Enemy enemy2 = new CrearYBorrarLarge.Enemy(500, 40, 7);
+    CrearYBorrarLarge.Enemy enemy3 = new CrearYBorrarLarge.Enemy(540, 500, 9);
+    CrearYBorrarLarge.Enemy enemy4 = new CrearYBorrarLarge.Enemy(20, 530, 3);
     double start;
     double end;
     double quarter = 0.25;
@@ -64,14 +65,14 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
         }
     }
 
-    public CrearYBorrarNormal() {
-        setSize(400, 400);
-        setTitle("CrearYBorrarNormal");
+    public CrearYBorrarLarge() {
+        setSize(600, 600);
+        setTitle("CrearYBorrarLarge");
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        addMouseMotionListener(new MouseMotionListener2());
-        addMouseListener(new MouseListener2());
+        addMouseMotionListener(new CrearYBorrarLarge.MouseMotionListener2());
+        addMouseListener(new CrearYBorrarLarge.MouseListener2());
     }
 
     public void move() {
@@ -105,16 +106,16 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
     }
 
     public void paintComponent(Graphics g) {
-        Rectangle mouse = new Rectangle((x1 - 25), (y1 - 25), 50, 50);
+        Rectangle mouse = new Rectangle((x1 - 25), (y1 - 25), 75, 75);
         //Rectangle mouse = new Rectangle((200), (200), 50, 50);
         //enemy1
-        Rectangle e1 = new Rectangle(enemy1.ex, enemy1.ey, 60, 60);
+        Rectangle e1 = new Rectangle(enemy1.ex, enemy1.ey, 90, 90);
         //enemy2
-        Rectangle e2 = new Rectangle(enemy2.ex, enemy2.ey, 100, 20);
+        Rectangle e2 = new Rectangle(enemy2.ex, enemy2.ey, 150, 40);
         //enemy3
-        Rectangle e3 = new Rectangle(enemy3.ex, enemy3.ey, 20, 100);
+        Rectangle e3 = new Rectangle(enemy3.ex, enemy3.ey, 40, 150);
         //enemy4
-        Rectangle e4 = new Rectangle(enemy4.ex, enemy4.ey, 60, 40);
+        Rectangle e4 = new Rectangle(enemy4.ex, enemy4.ey, 90, 60);
         g.setColor(Color.RED);
         g.fillRect(mouse.x, mouse.y, mouse.width, mouse.height);
         //draw enemys
@@ -123,7 +124,7 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
         g.fillRect(e2.x, e2.y, e2.width, e2.height);
         g.fillRect(e3.x, e3.y, e3.width, e3.height);
         g.fillRect(e4.x, e4.y, e4.width, e4.height);
-        g.drawString("" + ((end - start) / billion), 300, 20);
+        g.drawString("" + ((end - start) / billion), 500, 60);
 
         //g.drawString("Collision = " + collision + " mouseDragged = " + 
         //mouseDragged + "!", 130, 60);
@@ -157,13 +158,13 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
             if (x < 0) {
                 setDirection(4);
             }
-            if (x > 365) {
+            if (x > 565) {
                 setDirection(2);
             }
-            if (y < 25) {
+            if (y < 0) {
                 setDirection(1);
             }
-            if (y > 365) {
+            if (y > 565) {
                 setDirection(3);
             }
             setCords();
@@ -245,16 +246,16 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
                 mx = 25;
             }
 
-            if (mx > 375) {
-                mx = 375;
+            if (mx > 575) {
+                mx = 575;
             }
 
             if (my < 25) {
                 my = 25;
             }
 
-            if (my > 375) {
-                my = 375;
+            if (my > 575) {
+                my = 575;
             }
 
             mouseDragged = true;
