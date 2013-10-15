@@ -69,12 +69,14 @@ public class CrearYBorrar extends JFrame implements Runnable {
         //mouse
         x1 = mx;
         y1 = my;
-        //enemys
-        enemy1.update();
-        enemy2.update();
-        enemy3.update();
-        enemy4.update();
+        //time
         speed = ((end - start)/billion) * quarter + 1;
+        //enemys
+        enemy1.update(speed);
+        enemy2.update(speed);
+        enemy3.update(speed);
+        enemy4.update(speed);
+        
         //System.out.println(((end - start)/billion));
         //System.out.println("end =" + end);
         //System.out.println("start = " + start);
@@ -117,98 +119,7 @@ public class CrearYBorrar extends JFrame implements Runnable {
             
         repaint();
     }
-    public class Enemy {
-        //the enemy class
-        double x;
-        double y;
-        int ex;
-        int ey;
-        int direction;
         
-        public Enemy(double startX, double startY, int startDirection) {
-            x = startX;
-            y = startY;
-            direction = startDirection;
-        }
-        
-        public void update() {
-            if (x < 35) {
-                setDirection(4);
-            }
-            if (x > 365) {
-                setDirection(2);
-            }
-            if (y < 35) {
-                setDirection(1);
-            }
-            if (y > 365) {
-                setDirection(3);
-            }
-            setCords();
-            ex = (int)Math.round(x);
-            ey = (int)Math.round(y);
-            //System.out.println("(" + ex + "," + ey + ")");
-            
-        }
-        
-        public void setCords() {
-            if (direction == 2) {
-                x = x + (0 * speed);
-                y = y - (1 * speed);
-            }
-            if (direction == 3) {
-                x = x + (1 * speed);
-                y = y - (1 * speed);
-            }
-            if (direction == 4) {
-                x = x + (1 * speed);
-                y = y - (0 * speed);
-            }
-            if (direction == 5) {
-                x = x + (1 * speed);
-                y = y + (1 * speed);
-            }
-            if (direction == 6) {
-                x = x + (0 * speed);
-                y = y + (1 * speed);
-            }
-            if (direction == 7) {
-                x = x - (1 * speed);
-                y = y + (1 * speed);
-            }
-            if (direction == 8) {
-                x = x - (1 * speed);
-                y = y + (0 * speed);
-            }
-            if (direction == 9 || direction == 0) {
-                x = x - (1 * speed);
-                y = y - (1 * speed);
-            }
-            
-        }
-        public void setDirection(int side) {
-            Random ran = new Random();
-            if (side == 1) {
-                direction = ran.nextInt(7 - 5 + 1) + 5;
-            }
-            if (side == 2) {
-                direction = ran.nextInt(9 - 7 + 1) + 7;
-            }
-            if (side == 3) {
-                direction = ran.nextInt(3 - 1 + 1) + 1;
-            }
-            if (side == 4) {
-                direction = ran.nextInt(5 - 3 + 1) + 3;
-            }
-        }
-        
-        
-        
-        public void main(String[] args) {
-            
-        }
-        
-    }
     
     
     

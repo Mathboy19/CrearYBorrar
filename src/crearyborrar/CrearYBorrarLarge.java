@@ -21,10 +21,10 @@ public class CrearYBorrarLarge extends JFrame implements Runnable {
     int my = 300;
     int x1 = 225;
     int y1 = 225;
-    CrearYBorrarLarge.Enemy enemy1 = new CrearYBorrarLarge.Enemy(20, 20, 5);
-    CrearYBorrarLarge.Enemy enemy2 = new CrearYBorrarLarge.Enemy(500, 40, 7);
-    CrearYBorrarLarge.Enemy enemy3 = new CrearYBorrarLarge.Enemy(540, 500, 9);
-    CrearYBorrarLarge.Enemy enemy4 = new CrearYBorrarLarge.Enemy(20, 530, 3);
+    EnemyLarge enemy1 = new EnemyLarge(20, 20, 5);
+    EnemyLarge enemy2 = new EnemyLarge(500, 40, 7);
+    EnemyLarge enemy3 = new EnemyLarge(540, 500, 9);
+    EnemyLarge enemy4 = new EnemyLarge(20, 530, 3);
     double start;
     double end;
     double quarter = 0.25;
@@ -85,12 +85,13 @@ public class CrearYBorrarLarge extends JFrame implements Runnable {
         //mouse
         x1 = mx;
         y1 = my;
+        //time
+        speed = ((end - start)/billion) * quarter + 1;
         //enemys
-        enemy1.update();
-        enemy2.update();
-        enemy3.update();
-        enemy4.update();
-        speed = ((end - start) / billion) * quarter + 1;
+        enemy1.update(speed);
+        enemy2.update(speed);
+        enemy3.update(speed);
+        enemy4.update(speed);
         //System.out.println(((end - start)/billion));
         //System.out.println("end =" + end);
         //System.out.println("start = " + start);
@@ -136,100 +137,39 @@ public class CrearYBorrarLarge extends JFrame implements Runnable {
 
         repaint();
     }
-
-    public class Enemy {
-        //the enemy class
-
-        double x;
-        double y;
-        int ex;
-        int ey;
-        int direction;
-
-        public Enemy(int startX, int startY, int startDirection) {
+    
+    private class EnemyLarge extends Enemy {
+        
+        public EnemyLarge(int startX, int startY, int startDirection) {
+            super(startX, startY, startDirection);
             ex = startX;
             ey = startY;  
             x = startX;
             y = startY;
             direction = startDirection;
         }
-
-        public void update() {
+        @Override
+        public void update(double speed) {
             if (x < 0) {
                 setDirection(4);
             }
-            if (x > 565) {
+            if (x > 465) {
                 setDirection(2);
             }
-            if (y < 0) {
+            if (y < 25) {
                 setDirection(1);
             }
-            if (y > 565) {
+            if (y > 465) {
                 setDirection(3);
             }
-            setCords();
+            setCords(speed);
             ex = (int) Math.round(x);
             ey = (int) Math.round(y);
             //System.out.println("(" + ex + "," + ey + ")");
-
-        }
-
-        public void setCords() {
-            if (direction == 2) {
-                x = x + (0 * speed);
-                y = y - (1 * speed);
-            }
-            if (direction == 3) {
-                x = x + (1 * speed);
-                y = y - (1 * speed);
-            }
-            if (direction == 4) {
-                x = x + (1 * speed);
-                y = y - (0 * speed);
-            }
-            if (direction == 5) {
-                x = x + (1 * speed);
-                y = y + (1 * speed);
-            }
-            if (direction == 6) {
-                x = x + (0 * speed);
-                y = y + (1 * speed);
-            }
-            if (direction == 7) {
-                x = x - (1 * speed);
-                y = y + (1 * speed);
-            }
-            if (direction == 8) {
-                x = x - (1 * speed);
-                y = y + (0 * speed);
-            }
-            if (direction == 9 || direction == 0) {
-                x = x - (1 * speed);
-                y = y - (1 * speed);
-            }
-
-        }
-
-        public void setDirection(int side) {
-            Random ran = new Random();
-            if (side == 1) {
-                direction = ran.nextInt(7 - 5 + 1) + 5;
-            }
-            if (side == 2) {
-                direction = ran.nextInt(9 - 7 + 1) + 7;
-            }
-            if (side == 3) {
-                direction = ran.nextInt(3 - 1 + 1) + 1;
-            }
-            if (side == 4) {
-                direction = ran.nextInt(5 - 3 + 1) + 3;
-            }
-        }
-
-        public void main(String[] args) {
+        
         }
     }
-
+    
     public class MouseMotionListener2 implements MouseMotionListener {
 
         @Override
@@ -266,8 +206,8 @@ public class CrearYBorrarLarge extends JFrame implements Runnable {
     public class MouseListener2 implements MouseListener {
         @Override
         public void mousePressed(MouseEvent e) {
-            if(e.getX() > 200 && e.getX() < 250 && e.getY() > 200 && 
-            e.getY() < 250) {
+            if(e.getX() > 300 && e.getX() < 375 && e.getY() > 300 && 
+            e.getY() < 375) {
                 mousePressed = true;
             }
             e.consume();

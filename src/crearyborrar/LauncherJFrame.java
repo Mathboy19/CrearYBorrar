@@ -182,6 +182,11 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
             //Threads
             Thread t3 = new Thread(c3);
             t3.start();
+        } else if (choice == 4) {
+            CrearYBorrarGigantic c4 = new CrearYBorrarGigantic();
+            //Threads
+            Thread t4 = new Thread(c4);
+            t4.start();
         } else if (choice == 0) {
             JOptionPane.showMessageDialog(null, 
                     "Gamemode Not Supported!", 
@@ -219,8 +224,15 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
             updateFrame();
         } if (selection == "Large") {
             choice = 3;
+            description = "Large Mode:"
+                    + "\nBigger than Normal!";
+            updateFrame();
         } if (selection == "Gigantic") {
-            choice = 0;
+            choice = 4;
+            description = "Gigantic Mode:"
+                    + "\nTwice the size, twice the"
+                    + "\n Enemys!";
+            updateFrame();
         }
         
     }//GEN-LAST:event_jComboBox1ItemStateChanged
@@ -230,10 +242,10 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
         JOptionPane.showMessageDialog(null, 
                     "Info:"
                     + "\nCreater: Mathboy19"
-                    + "\nVersion: 1.3"
+                    + "\nVersion: 1.4"
                     + "\nFor more information, visit:"
                     + "\nwww.github.com/Mathboy19/CrearYBorrar",
-                    "CrearYBorrar Info", JOptionPane.ERROR_MESSAGE);
+                    "CrearYBorrar Info", JOptionPane.DEFAULT_OPTION);
         
     }//GEN-LAST:event_jButton2ActionPerformed
 

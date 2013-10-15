@@ -10,7 +10,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class CrearYBorrarNormal extends JFrame implements Runnable {
+public class CrearYBorrarGigantic extends JFrame implements Runnable {
 
     private Image dbImage;
     private Graphics dbg;
@@ -19,9 +19,9 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
     int x1 = 225;
     int y1 = 225;
     Enemy enemy1 = new Enemy(20, 20, 5);
-    Enemy enemy2 = new Enemy(300, 40, 7);
-    Enemy enemy3 = new Enemy(340, 300, 9);
-    Enemy enemy4 = new Enemy(20, 330, 3);
+    Enemy enemy2 = new Enemy(700, 40, 7);
+    Enemy enemy3 = new Enemy(740, 700, 9);
+    Enemy enemy4 = new Enemy(20, 730, 3);
     double start;
     double end;
     double quarter = 0.25;
@@ -62,9 +62,9 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
         }
     }
 
-    public CrearYBorrarNormal() {
-        setSize(400, 400);
-        setTitle("CrearYBorrarNormal");
+    public CrearYBorrarGigantic() {
+        setSize(800, 800);
+        setTitle("CrearYBorrarGigantic");
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
