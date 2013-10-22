@@ -16,8 +16,8 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
     private Graphics dbg;
     int mx = 200;
     int my = 200;
-    int x1 = 225;
-    int y1 = 225;
+    int x1 = 200;
+    int y1 = 200;
     Enemy enemy1 = new Enemy(20, 20, 5);
     Enemy enemy2 = new Enemy(300, 40, 7);
     Enemy enemy3 = new Enemy(340, 300, 9);
@@ -75,7 +75,7 @@ public class CrearYBorrarNormal extends JFrame implements Runnable {
     public void move() {
         if (mouseReleased == true) {
             collision = true;
-            JOptionPane.showMessageDialog(null, 
+            JOptionPane.showMessageDialog(this, 
                     "You Unclicked! You have to hold down the mouse to play!", 
                     "Mouse Error!", JOptionPane.ERROR_MESSAGE);
         }

@@ -19,8 +19,8 @@ public class CrearYBorrarLarge extends JFrame implements Runnable {
     private Graphics dbg;
     int mx = 300;
     int my = 300;
-    int x1 = 225;
-    int y1 = 225;
+    int x1 = 300;
+    int y1 = 300;
     EnemyLarge enemy1 = new EnemyLarge(20, 20, 5);
     EnemyLarge enemy2 = new EnemyLarge(500, 40, 7);
     EnemyLarge enemy3 = new EnemyLarge(540, 500, 9);
@@ -78,7 +78,7 @@ public class CrearYBorrarLarge extends JFrame implements Runnable {
     public void move() {
         if (mouseReleased == true) {
             collision = true;
-            JOptionPane.showMessageDialog(null, 
+            JOptionPane.showMessageDialog(this, 
                     "You Unclicked! You have to hold down the mouse to play!", 
                     "Mouse Error!", JOptionPane.ERROR_MESSAGE);
         }
@@ -206,7 +206,7 @@ public class CrearYBorrarLarge extends JFrame implements Runnable {
     public class MouseListener2 implements MouseListener {
         @Override
         public void mousePressed(MouseEvent e) {
-            if(e.getX() > 300 && e.getX() < 375 && e.getY() > 300 && 
+            if (e.getX() > 300 && e.getX() < 375 && e.getY() > 300 && 
             e.getY() < 375) {
                 mousePressed = true;
             }

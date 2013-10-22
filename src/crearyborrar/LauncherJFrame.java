@@ -231,7 +231,10 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
             choice = 4;
             description = "Gigantic Mode:"
                     + "\nTwice the size, twice the"
-                    + "\n Enemys!";
+                    + "\nEnemys!"
+                    + "\n*Note: Try clicking in the"
+                    + "\nlower right corner of the"
+                    + "\nred box to start*";
             updateFrame();
         }
         
