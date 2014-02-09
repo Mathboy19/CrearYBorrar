@@ -1,16 +1,15 @@
 package crearyborrar;
 
 
+import highscore.HighScoreList;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.JFrame;
-import java.util.Random;
 import javax.swing.JOptionPane;
 
 public class CrearYBorrarLarge extends JFrame implements Runnable {
@@ -19,12 +18,15 @@ public class CrearYBorrarLarge extends JFrame implements Runnable {
     private Graphics dbg;
     int mx = 300;
     int my = 300;
+    int mmx;
+    int mmy;
     int x1 = 300;
     int y1 = 300;
     EnemyLarge enemy1 = new EnemyLarge(20, 20, 5);
     EnemyLarge enemy2 = new EnemyLarge(500, 40, 7);
     EnemyLarge enemy3 = new EnemyLarge(540, 500, 9);
     EnemyLarge enemy4 = new EnemyLarge(20, 530, 3);
+    HighScoreList hsl = new HighScoreList();
     double start;
     double end;
     double quarter = 0.25;
@@ -59,7 +61,15 @@ public class CrearYBorrarLarge extends JFrame implements Runnable {
             //System.out.println("Game Over");
             //System.out.println("You got:" + "Something" + " seconds!");
             JOptionPane.showMessageDialog(this,
-                    "Collision: You got " + ((end - start) / billion) + " seconds!");
+                    "Collision: You got " + ((end - start) / billion) + 
+                    " seconds!");
+            //save highscore
+            String name = (String)JOptionPane.showInputDialog(this, 
+                    "What is your name?", "Name?", 
+                    JOptionPane.QUESTION_MESSAGE);
+            hsl.add(name, ((end - start) / billion));
+            hsl.save("large.txt");
+            super.dispose();
         } catch (Exception e) {
             System.out.println("Error");
         }
@@ -71,8 +81,8 @@ public class CrearYBorrarLarge extends JFrame implements Runnable {
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        addMouseMotionListener(new CrearYBorrarLarge.MouseMotionListener2());
-        addMouseListener(new CrearYBorrarLarge.MouseListener2());
+        addMouseMotionListener(new CrearYBorrarLarge.MouseMotionListenerLardge());
+        addMouseListener(new CrearYBorrarLarge.MouseListenerLarge());
     }
 
     public void move() {
@@ -126,6 +136,7 @@ public class CrearYBorrarLarge extends JFrame implements Runnable {
         g.fillRect(e3.x, e3.y, e3.width, e3.height);
         g.fillRect(e4.x, e4.y, e4.width, e4.height);
         g.drawString("" + ((end - start) / billion), 500, 60);
+        //g.drawString("(" + mmx + "," + mmy + ")", 20, 20); 
 
         //g.drawString("Collision = " + collision + " mouseDragged = " + 
         //mouseDragged + "!", 130, 60);
@@ -170,11 +181,13 @@ public class CrearYBorrarLarge extends JFrame implements Runnable {
         }
     }
     
-    public class MouseMotionListener2 implements MouseMotionListener {
+    public class MouseMotionListenerLardge implements MouseMotionListener {
 
         @Override
         public void mouseMoved(MouseEvent e) {
             mouseDragged = false;
+            mmx = e.getX();
+            mmy = e.getY();
             e.consume();
         }
 
@@ -203,11 +216,11 @@ public class CrearYBorrarLarge extends JFrame implements Runnable {
         }
     }
 
-    public class MouseListener2 implements MouseListener {
+    public class MouseListenerLarge implements MouseListener {
         @Override
         public void mousePressed(MouseEvent e) {
-            if (e.getX() > 300 && e.getX() < 375 && e.getY() > 300 && 
-            e.getY() < 375) {
+            if (e.getX() > 275 && e.getX() < 350 && e.getY() > 275 && 
+            e.getY() < 350) {
                 mousePressed = true;
             }
             e.consume();

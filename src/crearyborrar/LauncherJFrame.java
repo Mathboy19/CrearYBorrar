@@ -4,10 +4,14 @@
  */
 package crearyborrar;
 
+import highscore.HighScore;
+import highscore.HighScoreList;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
-import java.awt.event.MouseListener;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
@@ -22,16 +26,55 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
      */
     int choice;
     String description = "This is not a gamemode!";
+    HighScoreList hsl = new HighScoreList();
+    DefaultListModel listmodel = new DefaultListModel(); 
 
     public LauncherJFrame() {
         initComponents();
+        
 
     }
     
     public void updateFrame() {
         jTextArea1.setText(description);
+        hsl.sort();
+        List hsa = hsl.getHighScoreArray();
+        listmodel.clear();
+        for (Iterator iterator = hsa.iterator(); iterator.hasNext();) {
+            HighScore element = (HighScore) iterator.next();
+            
+            String name = element.getName();
+            Double dscore = element.getScore();
+            String score = Double.toString(dscore);
+            
+            String hs = new String();
+            hs = (name + " - " + score);
+            listmodel.addElement(hs);
+        
+        }
+        if(choice == 1) {
+            listmodel.addElement(
+                    "No HighScores for Classic!");
+        }
+    }   
+    
+    
+    
+    public void readHighScoreFile() {
+        hsl.highscorearray.clear();
+        switch (choice) {
+            case 1:  hsl.load("classic.txt");
+                     break;
+            case 2:  hsl.load("normal.txt");
+                     break;
+            case 3:  hsl.load("large.txt");
+                     break;
+            case 4:  hsl.load("gigantic.txt");
+                     break;
+        }
         
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,11 +91,14 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
-        jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jButton4 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -72,6 +118,7 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("resources/CrearYBorrar.gif")));
 
         jButton1.setText("Play");
+        jButton1.setToolTipText("Play the Game!");
         jButton1.addActionListener(this);
 
         jLabel1.setText("Gamemode:");
@@ -79,18 +126,8 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pick One!", "Classic", "Normal", "Large", "Gigantic" }));
         jComboBox1.addItemListener(this);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 158, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 158, Short.MAX_VALUE)
-        );
-
         jButton2.setText("Help");
+        jButton2.setToolTipText("Click this to see some info about CrearYBorrar");
         jButton2.addActionListener(this);
 
         jButton3.setText("Exit");
@@ -101,7 +138,19 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
         jTextArea1.setColumns(10);
         jTextArea1.setRows(5);
         jTextArea1.setText(description);
+        jTextArea1.setToolTipText("Highscores for the sepecified gamemode.");
         jScrollPane2.setViewportView(jTextArea1);
+        jTextArea1.getAccessibleContext().setAccessibleName("");
+
+        jLabel2.setText("HighScores:");
+
+        jList1.setModel(listmodel);
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane4.setViewportView(jList1);
+
+        jButton4.setText("Refresh");
+        jButton4.setToolTipText("Click this to refresh the description and HighScores");
+        jButton4.addActionListener(this);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,35 +161,46 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 63, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -157,6 +217,9 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
         }
         else if (evt.getSource() == jButton3) {
             LauncherJFrame.this.jButton3ActionPerformed(evt);
+        }
+        else if (evt.getSource() == jButton4) {
+            LauncherJFrame.this.jButton4ActionPerformed(evt);
         }
     }
 
@@ -187,7 +250,7 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
             //Threads
             Thread t4 = new Thread(c4);
             t4.start();
-        } else if (choice == 0) {
+        } else {
             JOptionPane.showMessageDialog(null, 
                     "Gamemode Not Supported!", 
                     "Gamemode Error", JOptionPane.ERROR_MESSAGE);
@@ -205,6 +268,7 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
         if (selection == "Pick One!") {
             choice = 0;
             description = "This is not a gamemode!";
+            
             updateFrame();
         } if (selection == "Classic") {
             choice = 1;
@@ -214,6 +278,7 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
                     + "\nglitches."
                     + "\n\n**NOTE: This was the"
                     + "\nOriginal CrearYBorrar** ";
+            readHighScoreFile();
             updateFrame();
         } if (selection == "Normal") {
             choice = 2;
@@ -221,11 +286,13 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
                     + "\nThe non-glitchy Classic"
                     + "\nmode. Also contains some"
                     + "\nnew features.";
+            readHighScoreFile();
             updateFrame();
         } if (selection == "Large") {
             choice = 3;
             description = "Large Mode:"
                     + "\nBigger than Normal!";
+            readHighScoreFile();
             updateFrame();
         } if (selection == "Gigantic") {
             choice = 4;
@@ -235,6 +302,7 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
                     + "\n*Note: Try clicking in the"
                     + "\nlower right corner of the"
                     + "\nred box to start*";
+            readHighScoreFile();
             updateFrame();
         }
         
@@ -245,12 +313,17 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
         JOptionPane.showMessageDialog(null, 
                     "Info:"
                     + "\nCreater: Mathboy19"
-                    + "\nVersion: 1.4"
+                    + "\nVersion: 1.9"
                     + "\nFor more information, visit:"
                     + "\nwww.github.com/Mathboy19/CrearYBorrar",
                     "CrearYBorrar Info", JOptionPane.DEFAULT_OPTION);
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+      readHighScoreFile();
+      updateFrame();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,12 +364,15 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables

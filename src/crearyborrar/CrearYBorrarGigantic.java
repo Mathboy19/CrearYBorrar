@@ -1,5 +1,6 @@
 package crearyborrar;
 
+import highscore.HighScoreList;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -16,16 +17,19 @@ public class CrearYBorrarGigantic extends JFrame implements Runnable {
     private Graphics dbg;
     int mx = 400;
     int my = 400;
+    int mmx;
+    int mmy;
     int x1 = 400;
     int y1 = 400;
     EnemyGigantic enemy1 = new EnemyGigantic(20, 20, 5);
-    EnemyGigantic enemy2 = new EnemyGigantic(700, 40, 7);
-    EnemyGigantic enemy3 = new EnemyGigantic(740, 700, 9);
-    EnemyGigantic enemy4 = new EnemyGigantic(20, 730, 3);
-    EnemyGigantic enemy5 = new EnemyGigantic(400, 700, 6);
-    EnemyGigantic enemy6 = new EnemyGigantic(700, 440, 4);
+    EnemyGigantic enemy2 = new EnemyGigantic(400, 20, 6);
+    EnemyGigantic enemy3 = new EnemyGigantic(700, 20, 7);
+    EnemyGigantic enemy4 = new EnemyGigantic(700, 400, 8);
+    EnemyGigantic enemy5 = new EnemyGigantic(700, 700, 9);
+    EnemyGigantic enemy6 = new EnemyGigantic(440, 700, 2);
     EnemyGigantic enemy7 = new EnemyGigantic(20, 700, 3);
-    EnemyGigantic enemy8 = new EnemyGigantic(440, 20, 8);
+    EnemyGigantic enemy8 = new EnemyGigantic(20, 400, 4);
+    HighScoreList hsl = new HighScoreList();
     double start;
     double end;
     double quarter = 0.25;
@@ -60,7 +64,16 @@ public class CrearYBorrarGigantic extends JFrame implements Runnable {
             //System.out.println("Game Over");
             //System.out.println("You got:" + "Something" + " seconds!");
             JOptionPane.showMessageDialog(this,
-                    "Collision: You got " + ((end - start) / billion) + " seconds!");
+                    "Collision: You got " + ((end - start) / billion) + 
+                    " seconds!");
+            //save highscore
+            String name = (String)JOptionPane.showInputDialog(this, 
+                    "What is your name?", "Name?", 
+                    JOptionPane.QUESTION_MESSAGE);
+            hsl.add(name, ((end - start) / billion));
+            hsl.save("gigantic.txt");
+            
+            super.dispose();
         } catch (Exception e) {
             System.out.println("Error");
         }
@@ -72,8 +85,8 @@ public class CrearYBorrarGigantic extends JFrame implements Runnable {
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        addMouseMotionListener(new MouseMotionListener2());
-        addMouseListener(new MouseListener2());
+        addMouseMotionListener(new MouseMotionListenerGigantic());
+        addMouseListener(new MouseListenerGigantic());
     }
 
     public void move() {
@@ -122,10 +135,10 @@ public class CrearYBorrarGigantic extends JFrame implements Runnable {
         //enemy4
         Rectangle e4 = new Rectangle(enemy4.ex, enemy4.ey, 60, 40);
         //enemy5
-        Rectangle e5 = new Rectangle(enemy5.ex, enemy5.ey, 60, 60);
-        Rectangle e6 = new Rectangle(enemy6.ex, enemy6.ey, 60, 60);
-        Rectangle e7 = new Rectangle(enemy7.ex, enemy7.ey, 60, 60);
-        Rectangle e8 = new Rectangle(enemy8.ex, enemy8.ey, 60, 60);
+        Rectangle e5 = new Rectangle(enemy5.ex, enemy5.ey, 70, 60);
+        Rectangle e6 = new Rectangle(enemy6.ex, enemy6.ey, 60, 70);
+        Rectangle e7 = new Rectangle(enemy7.ex, enemy7.ey, 80, 80);
+        Rectangle e8 = new Rectangle(enemy8.ex, enemy8.ey, 70, 70);
         g.setColor(Color.RED);
         g.fillRect(mouse.x, mouse.y, mouse.width, mouse.height);
         //draw enemys
@@ -139,12 +152,14 @@ public class CrearYBorrarGigantic extends JFrame implements Runnable {
         g.fillRect(e7.x, e7.y, e7.width, e7.height);
         g.fillRect(e8.x, e8.y, e8.width, e8.height);
         g.drawString("" + ((end - start) / billion), 700, 20);
+        g.drawString("(" + mmx + "," + mmy + ")", 20, 100); 
 
         //g.drawString("Collision = " + collision + " mouseDragged = " + 
         //mouseDragged + "!", 130, 60);
         if (mouse.intersects(e1) || mouse.intersects(e2)
                 || mouse.intersects(e3) || mouse.intersects(e4) || 
-                mouse.intersects(e5)) {
+                mouse.intersects(e5) || mouse.intersects(e6) ||
+                mouse.intersects(e7) || mouse.intersects(e8) ) {
             //g.drawString("Collision!!", 175, 75);
             collision = true;
         }
@@ -185,11 +200,13 @@ public class CrearYBorrarGigantic extends JFrame implements Runnable {
     }
 
 
-    public class MouseMotionListener2 implements MouseMotionListener {
+    public class MouseMotionListenerGigantic implements MouseMotionListener {
 
         @Override
         public void mouseMoved(MouseEvent e) {
             mouseDragged = false;
+            mmx = e.getX();
+            mmy = e.getY();
             e.consume();
         }
 
@@ -218,11 +235,11 @@ public class CrearYBorrarGigantic extends JFrame implements Runnable {
         }
     }
 
-    public class MouseListener2 implements MouseListener {
+    public class MouseListenerGigantic implements MouseListener {
         @Override
         public void mousePressed(MouseEvent e) {
-            if(e.getX() > 400 && e.getX() < 450 && e.getY() > 400 && 
-            e.getY() < 450) {
+            if(e.getX() > 375 && e.getX() < 425 && e.getY() > 375 && 
+            e.getY() < 425) {
                 mousePressed = true;
             }
             e.consume();

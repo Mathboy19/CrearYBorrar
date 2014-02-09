@@ -63,7 +63,7 @@ public class CrearYBorrar extends JFrame implements Runnable {
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        addMouseMotionListener(new MouseListener());
+        addMouseMotionListener(new MouseListenerClassic());
     }
     public void move() {
         //mouse
@@ -126,7 +126,7 @@ public class CrearYBorrar extends JFrame implements Runnable {
     
     
     
-    public class MouseListener implements MouseMotionListener {
+    public class MouseListenerClassic implements MouseMotionListener {
         @Override
         public void mouseMoved(MouseEvent e) {
             mouseDragged = false;
