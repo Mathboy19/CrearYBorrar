@@ -3,10 +3,10 @@ CrearYBorrar README
 
 Important Info!
 -------------------
-Update 1.9 is huge, and is a stepping stone for 2.0, the final version I will create! Of Course, as with any update, there are a few new things to now. First Of, to run from source you will now need the HighScores Library which I created for this project. You can find it under my(mathboy19's) repos. Secondly, 1.9 is a build intended for testing, and bug finding of the program, as there has been little/none on the previous builds. If you find any bugs, please put it under the issues part.
+The version 2.0 is going to be it for the most part, for this project, as I have other things that I want to play around with. This does not mean that I am not willing to totally give up on this project however. If you have anything you want me to fix, report it, and I'll gladly fix it for you. I hope you enjoy version 2.0!
 
 Thanks,
-    Mathboy19
+    Mathboy19 
 
 
 
@@ -17,12 +17,10 @@ Thanks,
 
 *This game was created using netbeans. Please ignore the LauncherJFrame.form file, but if you want, this project is available to clone in netbeans.*
 
-Changelog(v1.9):
+Changelog(v2.0):
 -----------
-    - Added HighScores (You now need my HighScores Library to run from source)
     - Bug Fixes
 
 Todo
 -----
-   - Add highscores
-   - Fix some problems with Gigantic
+   - Fix any more found bugs.
