@@ -64,12 +64,15 @@ public class CrearYBorrarGigantic extends JFrame implements Runnable {
             //System.out.println("Game Over");
             //System.out.println("You got:" + "Something" + " seconds!");
             JOptionPane.showMessageDialog(this,
-                    "Collision: You got " + ((end - start) / billion) + 
+                    "Game Over: You got " + ((end - start) / billion) + 
                     " seconds!");
             //save highscore
             String name = (String)JOptionPane.showInputDialog(this, 
                     "What is your name?", "Name?", 
                     JOptionPane.QUESTION_MESSAGE);
+            if("".equals(name) || name == null) {
+                name = "Anon";
+            }
             hsl.add(name, ((end - start) / billion));
             hsl.save("gigantic.txt");
             
@@ -152,7 +155,7 @@ public class CrearYBorrarGigantic extends JFrame implements Runnable {
         g.fillRect(e7.x, e7.y, e7.width, e7.height);
         g.fillRect(e8.x, e8.y, e8.width, e8.height);
         g.drawString("" + ((end - start) / billion), 700, 20);
-        g.drawString("(" + mmx + "," + mmy + ")", 20, 100); 
+        //g.drawString("(" + mmx + "," + mmy + ")", 20, 100); 
 
         //g.drawString("Collision = " + collision + " mouseDragged = " + 
         //mouseDragged + "!", 130, 60);

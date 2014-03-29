@@ -196,11 +196,12 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2)
                         .addGap(18, 18, 18)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         pack();
@@ -230,32 +231,33 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (choice == 1) {
-            CrearYBorrar c1 = new CrearYBorrar();
-            //Threads
-            Thread t1 = new Thread(c1);
-            t1.start();
-        } else if (choice == 2) {
-            CrearYBorrarNormal c2 = new CrearYBorrarNormal();
-            //Threads
-            Thread t2 = new Thread(c2);
-            t2.start();
-        } else if (choice == 3) {
-            CrearYBorrarLarge c3 = new CrearYBorrarLarge();
-            //Threads
-            Thread t3 = new Thread(c3);
-            t3.start();
-        } else if (choice == 4) {
-            CrearYBorrarGigantic c4 = new CrearYBorrarGigantic();
-            //Threads
-            Thread t4 = new Thread(c4);
-            t4.start();
-        } else {
-            JOptionPane.showMessageDialog(null, 
+        switch (choice) {
+            case 1:  CrearYBorrar c1 = new CrearYBorrar();
+                     //Threads
+                     Thread t1 = new Thread(c1);
+                     t1.start();
+                     break;
+            case 2:  CrearYBorrarNormal c2 = new CrearYBorrarNormal();
+                     //Threads
+                     Thread t2 = new Thread(c2);
+                     t2.start();
+                     break;
+            case 3:  CrearYBorrarLarge c3 = new CrearYBorrarLarge();
+                     //Threads
+                     Thread t3 = new Thread(c3);
+                     t3.start();
+                     break;
+            case 4:  CrearYBorrarGigantic c4 = new CrearYBorrarGigantic();
+                     //Threads
+                     Thread t4 = new Thread(c4);
+                     t4.start();
+                     break;
+            default: JOptionPane.showMessageDialog(null, 
                     "Gamemode Not Supported!", 
                     "Gamemode Error", JOptionPane.ERROR_MESSAGE);
+                     break;
+        
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -265,12 +267,12 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         JComboBox cb = (JComboBox) evt.getSource();
         String selection = (String) cb.getSelectedItem();
-        if (selection == "Pick One!") {
+        if ("Pick One!".equals(selection)) {
             choice = 0;
             description = "This is not a gamemode!";
             
             updateFrame();
-        } if (selection == "Classic") {
+        } if ("Classic".equals(selection)) {
             choice = 1;
             description = "Classic Mode:"
                     + "\nThe first mode that was"
@@ -280,7 +282,7 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
                     + "\nOriginal CrearYBorrar** ";
             readHighScoreFile();
             updateFrame();
-        } if (selection == "Normal") {
+        } if ("Normal".equals(selection)) {
             choice = 2;
             description = "Normal Mode:"
                     + "\nThe non-glitchy Classic"
@@ -288,13 +290,13 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
                     + "\nnew features.";
             readHighScoreFile();
             updateFrame();
-        } if (selection == "Large") {
+        } if ("Large".equals(selection)) {
             choice = 3;
             description = "Large Mode:"
                     + "\nBigger than Normal!";
             readHighScoreFile();
             updateFrame();
-        } if (selection == "Gigantic") {
+        } if ("Gigantic".equals(selection)) {
             choice = 4;
             description = "Gigantic Mode:"
                     + "\nTwice the size, twice the"
@@ -313,7 +315,7 @@ public class LauncherJFrame extends javax.swing.JFrame implements ActionListener
         JOptionPane.showMessageDialog(null, 
                     "Info:"
                     + "\nCreater: Mathboy19"
-                    + "\nVersion: 1.9"
+                    + "\nVersion: 2.0"
                     + "\nFor more information, visit:"
                     + "\nwww.github.com/Mathboy19/CrearYBorrar",
                     "CrearYBorrar Info", JOptionPane.DEFAULT_OPTION);

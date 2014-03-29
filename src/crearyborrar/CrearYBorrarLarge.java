@@ -61,12 +61,15 @@ public class CrearYBorrarLarge extends JFrame implements Runnable {
             //System.out.println("Game Over");
             //System.out.println("You got:" + "Something" + " seconds!");
             JOptionPane.showMessageDialog(this,
-                    "Collision: You got " + ((end - start) / billion) + 
+                    "Game Over: You got " + ((end - start) / billion) + 
                     " seconds!");
             //save highscore
             String name = (String)JOptionPane.showInputDialog(this, 
                     "What is your name?", "Name?", 
                     JOptionPane.QUESTION_MESSAGE);
+            if("".equals(name) || name == null) {
+                name = "Anon";
+            }
             hsl.add(name, ((end - start) / billion));
             hsl.save("large.txt");
             super.dispose();
@@ -117,7 +120,7 @@ public class CrearYBorrarLarge extends JFrame implements Runnable {
     }
 
     public void paintComponent(Graphics g) {
-        Rectangle mouse = new Rectangle((x1 - 25), (y1 - 25), 75, 75);
+        Rectangle mouse = new Rectangle((x1 - 30), (y1 - 30), 75, 75);
         //Rectangle mouse = new Rectangle((200), (200), 50, 50);
         //enemy1
         Rectangle e1 = new Rectangle(enemy1.ex, enemy1.ey, 90, 90);
@@ -161,16 +164,16 @@ public class CrearYBorrarLarge extends JFrame implements Runnable {
         }
         @Override
         public void update(double speed) {
-            if (x < 0) {
+            if (x < 25) {
                 setDirection(4);
             }
-            if (x > 465) {
+            if (x > 575) {
                 setDirection(2);
             }
             if (y < 25) {
                 setDirection(1);
             }
-            if (y > 465) {
+            if (y > 575) {
                 setDirection(3);
             }
             setCords(speed);
